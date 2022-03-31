@@ -34,8 +34,10 @@ class TestMathFunc(unittest.TestCase):
         """Test method multi(a, b)"""
         self.assertEqual(6, multi(2, 3))
 
+    # @unittest.skip("I don't want to run this case.")
     def test_divide(self):
         """Test method divide(a, b)"""
+        self.skipTest("Don't run this.")
         self.assertEqual(2, divide(6, 3))
         self.assertEqual(2.5, divide(5, 2))
 

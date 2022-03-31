@@ -8,7 +8,11 @@ from HTMLTestRunner import HTMLTestRunner
 def main():
     suite = unittest.TestSuite()
 
-    # tests = [TestMathFunc("test_add"), TestMathFunc("test_minus"), TestMathFunc("test_divide")]
+    # tests = [
+    #     TestMathFunc("test_add"),
+    #     TestMathFunc("test_minus"),
+    #     TestMathFunc("test_divide"),
+    # ]
     # suite.addTests(tests)
 
     # suite.addTest(TestMathFunc("test_multi"))
