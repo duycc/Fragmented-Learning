@@ -19,11 +19,11 @@ all_structs = []
 
 
 class Iface(object):
-    def multiply(self, n1, n2):
+    def multiply(self, x, y):
         """
         Parameters:
-         - n1
-         - n2
+         - x
+         - y
 
         """
         pass
@@ -36,21 +36,21 @@ class Client(Iface):
             self._oprot = oprot
         self._seqid = 0
 
-    def multiply(self, n1, n2):
+    def multiply(self, x, y):
         """
         Parameters:
-         - n1
-         - n2
+         - x
+         - y
 
         """
-        self.send_multiply(n1, n2)
+        self.send_multiply(x, y)
         return self.recv_multiply()
 
-    def send_multiply(self, n1, n2):
+    def send_multiply(self, x, y):
         self._oprot.writeMessageBegin('multiply', TMessageType.CALL, self._seqid)
         args = multiply_args()
-        args.n1 = n1
-        args.n2 = n2
+        args.x = x
+        args.y = y
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -104,7 +104,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = multiply_result()
         try:
-            result.success = self._handler.multiply(args.n1, args.n2)
+            result.success = self._handler.multiply(args.x, args.y)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -127,15 +127,15 @@ class Processor(Iface, TProcessor):
 class multiply_args(object):
     """
     Attributes:
-     - n1
-     - n2
+     - x
+     - y
 
     """
 
 
-    def __init__(self, n1=None, n2=None,):
-        self.n1 = n1
-        self.n2 = n2
+    def __init__(self, x=None, y=None,):
+        self.x = x
+        self.y = y
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -148,12 +148,12 @@ class multiply_args(object):
                 break
             if fid == 1:
                 if ftype == TType.I32:
-                    self.n1 = iprot.readI32()
+                    self.x = iprot.readI32()
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.I32:
-                    self.n2 = iprot.readI32()
+                    self.y = iprot.readI32()
                 else:
                     iprot.skip(ftype)
             else:
@@ -166,13 +166,13 @@ class multiply_args(object):
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
         oprot.writeStructBegin('multiply_args')
-        if self.n1 is not None:
-            oprot.writeFieldBegin('n1', TType.I32, 1)
-            oprot.writeI32(self.n1)
+        if self.x is not None:
+            oprot.writeFieldBegin('x', TType.I32, 1)
+            oprot.writeI32(self.x)
             oprot.writeFieldEnd()
-        if self.n2 is not None:
-            oprot.writeFieldBegin('n2', TType.I32, 2)
-            oprot.writeI32(self.n2)
+        if self.y is not None:
+            oprot.writeFieldBegin('y', TType.I32, 2)
+            oprot.writeI32(self.y)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -193,8 +193,8 @@ class multiply_args(object):
 all_structs.append(multiply_args)
 multiply_args.thrift_spec = (
     None,  # 0
-    (1, TType.I32, 'n1', None, None, ),  # 1
-    (2, TType.I32, 'n2', None, None, ),  # 2
+    (1, TType.I32, 'x', None, None, ),  # 1
+    (2, TType.I32, 'y', None, None, ),  # 2
 )
 
 

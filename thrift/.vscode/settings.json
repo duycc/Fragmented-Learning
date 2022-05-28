@@ -1,9 +1,8 @@
 {
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/gen-py/"
+    ],
     "python.analysis.extraPaths": [
-        "./gen-py"
-    ],
-    "python.formatting.autopep8Args": [
-        "--ignore",
-        "E402"
-    ],
+        "${workspaceFolder}/gen-py/"
+    ]
 }

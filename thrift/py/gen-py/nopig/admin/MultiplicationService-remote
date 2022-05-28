@@ -16,15 +16,15 @@ else:
 from thrift.transport import TTransport, TSocket, TSSLSocket, THttpClient
 from thrift.protocol.TBinaryProtocol import TBinaryProtocol
 
-from multiplication import MultiplicationService
-from multiplication.ttypes import *
+from nopig.admin import MultiplicationService
+from nopig.admin.ttypes import *
 
 if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('')
     print('Usage: ' + sys.argv[0] + ' [-h host[:port]] [-u url] [-f[ramed]] [-s[sl]] [-novalidate] [-ca_certs certs] [-keyfile keyfile] [-certfile certfile] function [arg1 [arg2...]]')
     print('')
     print('Functions:')
-    print('  int multiply(int n1, int n2)')
+    print('  int multiply(int x, int y)')
     print('')
     sys.exit(0)
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import logging
+# import logging
 
 # ------------------------------------------------------------------------------
 #   logging提供的模块级别的函数
@@ -22,6 +22,32 @@ import logging
 #     "Some one delete the log file", exc_info=True, stack_info=True, extra={"user": "Tom", "ip": "127.0.0.1"}
 # )
 
-LOG_FORMAT = "%(levelname)s %(asctime)s %(filename)s:%(lineno)d _msg=%(message)s"
-logging.basicConfig(format=LOG_FORMAT)
-logging.warning("[test_logging] test err")
+# LOG_FORMAT = "%(levelname)s %(asctime)s %(filename)s:%(lineno)d _msg=%(message)s"
+# logging.basicConfig(format=LOG_FORMAT)
+# logging.warning("[test_logging] test err")
+
+
+import logging
+import logging.handlers
+import datetime
+
+logger = logging.getLogger("dlogger")
+logger.setLevel(logging.DEBUG)
+
+rf_handler = logging.handlers.TimedRotatingFileHandler(
+    "all.log", when="midnight", interval=1, backupCount=7, atTime=datetime.time(0, 0, 0, 0)
+)
+rf_handler.setFormatter(logging.Formatter("%(levelname)s %(asctime)s _msg=%(message)s"))
+
+f_handler = logging.FileHandler("error.log")
+f_handler.setLevel(logging.ERROR)
+f_handler.setFormatter(logging.Formatter("%(levelname)s %(asctime)s %(filename)s:%(lineno)d _msg=%(message)s"))
+
+logger.addHandler(rf_handler)
+logger.addHandler(f_handler)
+
+logger.debug("debug msg")
+logger.info("info msg")
+logger.warning("warning msg")
+logger.error("error msg")
+logger.critical("critical msg")
